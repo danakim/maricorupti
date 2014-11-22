@@ -1,0 +1,72 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Captura zilei</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#despre">Despre</a></li>
+                <li><a href="#contribuie">Contribuie</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filtre<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Data dosar</a></li>
+                    <li><a href="#">Cu executare</a></li>
+                    <li><a href="#">Ani</a></li>
+                    <li><a href="#">Inca un filtru</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+
+    <div class="container marketing">
+    <table class="table table-hover table-bordered table-responsive">
+    <thead>
+        <tr>
+          <th></th>
+          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Nume</h></th>
+          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Prenume</h></th>
+          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Funcție publică</h></th>
+          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Partid</h></th>
+          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Fapta</h></th>
+          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Câți ani a luat</h></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in dosare %}
+            <tr>
+                <td><img src="{{ row.6 }}" height="60" width="60"></img></td>
+                <td><h4 style='text-align: center'>{{ row.0 }}</h></td>
+                <td><h4 style='text-align: center'>{{ row.1 }}</h></td>
+                <td><h4 style='text-align: center'>{{ row.2 }}</h></td>
+                <td><h4 style='text-align: center'>{{ row.3 }}</h></td>
+                <td><h4 style='text-align: center'>{{ row.4 }}</h></td>
+                <td><h3 style='text-align: center'><strong>{{ row.5 }}</strong></h></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+    </div><!-- /.container -->
+{% endblock %}
