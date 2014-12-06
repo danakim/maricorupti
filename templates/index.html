@@ -1,7 +1,9 @@
-{% extends "bootstrap/base.html" %}
+{% block head %}
+{% include "head.html" %}
+{% endblock %}
 
 {% block content %}
-<link href="http://getbootstrap.com/examples/carousel/carousel.css" rel="stylesheet">
+<body>
 {% include "navbar.html" %}
     <!-- Carousel
     ================================================== -->
@@ -70,7 +72,7 @@
           <p class="lead">Din totalul de {{ total_dosare }} dosare, {{ total_dosare_cu_executare }} au fost inchise cu condamnari cu executare.</p>
         </div>
         <div class="col-md-5">
-          <a href="http://hostatic.ro:5000/dosare?filtru=cu_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/KafUIpg.png"></a>
+          <a href="/dosare?filtru=cu_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/KafUIpg.png"></a>
         </div>
       </div>
 
@@ -78,7 +80,7 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-          <a href="http://hostatic.ro:5000/dosare?filtru=fara_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/aDoAIp3.png"></a>
+          <a href="/dosare?filtru=fara_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/aDoAIp3.png"></a>
         </div>
         <div class="col-md-7">
           <h2 class="featurette-heading"><span class="text-muted">Condamnari</span> cu suspendare</h2>
@@ -103,4 +105,6 @@
       <!-- /END THE FEATURETTES -->
 
     </div><!-- /.container -->
+  </body>
+</html>
 {% endblock %}

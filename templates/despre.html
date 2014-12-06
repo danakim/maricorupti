@@ -1,0 +1,71 @@
+{% block head %}
+{% include "head.html" %}
+{% endblock %}
+
+{% block content %}
+<body>
+{% include "navbar.html" %}
+
+<div class="container">
+<h5> Unii-s rupți în cur în timp ce alții-s mari corupți</h5>
+<div class="well">
+Hai să vedem cât de mare e marea corupție în România.
+</div>
+</br><h5>De ce?</h5>
+<div class="well">
+Trăim momente istorice în lupta anticorupție și vrem să le marcăm printr-un compendiu al marilor corupți. Câți miniștri au fost condamnați, câți ani au însumat toate procesele lor de corupție, care sunt faptele cele mai frecvente pentru care au fost condamnați, câți au luat cu executare și câți cu suspendare, care partid are cei mai mulți condamnați de rang înalt? Ne-am pus și noi astfel de întrebări și am ales să construim o bază de date care ne poate da răspunsuri succinte și atractive din punct de vedere vizual.
+</div>
+</br><h5>Ce?</h5>
+<div class="well">
+Site-ul reprezintă o vizualizare a unei baze de date pe care o construim voluntar, manual, de la zero (vezi mai jos cum). Poți folosi meniul principal (categoria filtre) pentru a sorta baza de date după un criteriu anume (nume, funcție publică, partid, faptă, data sentinței definitive, durata dosarului, ani de pedeapsă, tipul pedepsei - cu sau fără executare)
+</div>
+</br>
+<div class="well">
+Pe pagina principală poți vedea
+o selecție de câțiva mari corupți (aleși pe sprânceană de echipa proiectului)
+câteva cifre care măsoară cât timp a trecut de la ultima condamnare, cel mai lung dosar, cea mai mare pedeapsă, total ani condamnare, etc.
+link-uri către politicienii condamnați cu executare, cei cu suspendare și sortarea condamnaților după apartenența la partid
+Fiecare politician centralizat în baza de date are o fișă individuală care prezintă informații contextual relevante: (porecla dosarului în media, link-uri din presă și de pe Wikipedia, descrierea faptei pe scurt, într-un limbaj accesibil, fără jargon juridic, precum și câmpurile accesibile direct din meniul de „filtre”, cele descrise anterior). Poți vedea cu ușurință și dacă politicianul în cauză e traseist sau nu.
+</div>
+</br><h5>Cum?</h5>
+<div class="well">
+Ne propunem să inventariem, în timp, cât mai mulți politicieni sau funcționari publice condamnați pentru fapte de corupție. Începem de la mare la mic, căci de corupția mică ne lovim zilnic, însă valul mediatic care a însoțit condamnările DNA din ultimii ani creează interes deosebit asupra corupției la nivel înalt. Desigur, corupția trebuie blamată inclusiv la nivel mic (și o facem!), însă ne e mai ușor să începem această arhivă cu cele mai faimoase condamnări din istoria României. Iar cele mai faimoase sunt cele despre care scrie presa. Lăsăm mass-media să-și joace rolul de intermediar (traducător) între instituțiile statului, așadar sursa bazei noastre de date nu e una primară (ex: comunicatele emise de DNA), ci una secundară, filtrată - articolele din presă referitoare la aceleași subiecte precum comunicatele DNA. Ne concentrăm pe om, nu pe dosar, chiar dacă unii au mai multe dosare pot avea o singură personalitate :) Facem deci muncă de analiză și sinteză pentru a rezuma totul într-un mod ordonat în baza de date.Aceasta e disponibilă în format deschis aici, bună de preluat la liber de alți entuziaști care vor să se joace cu cifrele.
+</div>
+</br><h5>Disclaimer: suntem nepartizani.</h5>
+<div class="well">
+Fără politică, suntem independenți - ținem cu cetățenii, suntem buni cetățeni. Nu ținem cu stânga sau cu dreapta, nu pretindem că suntem exhaustivi sau perfecți și nu avem nimic de demonstrat. Vrem să lăsăm în urmă pentru arheologii viitorului acest memorial al corupției din eterna noastră tranziție de la totalitarism la libertate. Vrem să nu se uite pedeapsa record - 10 ani cu executare - la care a fost condamnat Dan Voiculescu. 
+</div>
+</br><h5>Cine?</h5>
+<div class="well">
+Programare, server: Dan Achim
+Research, consiliere legală: Alina Calistru 
+Comunicare, concept, research: Cosmin Pojoranu 
+Ilustrație: Wanda Hutira, Liviu Bărbulescu, Mădălina Răileanu
+
+Iconițe: The Noun Project
+Foto via Google Images (nu deținem drepturi asupra imaginilor, ele aparțin proprietarilor de drept, pe care nu i-am putut identifica pentru a le solicita permisiunea folosirii)
+Inspirat de http://anticoruptie.hotnews.ro
+</div>
+<div class="well">
+Context: DNA există din 2002 iar ANI din 2007. TBC,,, Q: câte alte țări mai au structuri gendna?
+</div>
+<div class="well">
+Planuri de viitor:
+Vrem să consolidăm baza de date și să o deschidem contribuției publicului (crowd-sourcing)
+Vrem să automatizăm cumva preluarea de date noi prin apelarea API-ului portal.just.ro și prin parsarea paginii de comunicate de pe site-ul DNA
+Vrem să mărim baza de date ca să o putem corela și cu cifre financiare (prejudicii)
+</div>
+<div class="well">
+Implică-te: vrei să faci parte din echipă? Avem nevoie de voluntari care să întrețină baza de date, de buni ilustratori care să ne deseneze marii corupți în stilul site-ului precum și de oameni pricepuți tehnic (progamare) pentru dezvoltare de noi funcționalități. Dă-ne un semn pe ...... și ajută-ne să marcăm momentul istoric al marilor condamnări.
+</div>
+<div class="well">
+Donează
+PayPal
+</div>
+<div class="well">
+Istoric:
+22 noiembrie - prima sesiune de lucru
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,10 +1,20 @@
-{% extends "bootstrap/base.html" %}
+{% block head %}
+{% include "head.html" %}
+{% endblock %}
 
 {% block content %}
+<body>
+<script>
+jQuery(function($) {
+  $('#table-dosare').delegate('tr', 'click', function() {
+    window.location = $(this).data('url')
+  });
+});
+</script>
 {% include "navbar.html" %}
 
     <div class="container marketing">
-    <table class="table table-hover table-bordered table-responsive">
+    <table class="table table-hover table-bordered table-responsive" id="table-dosare">
     <thead>
         <tr>
           <th></th>
@@ -18,14 +28,14 @@
       </thead>
       <tbody>
         {% for row in dosare %}
-            <tr>
-                <td><img src="{{ row.6 }}" height="60" width="60"></img></td>
-                <td><h4 style='text-align: center'>{{ row.0 }}</h></td>
+            <tr data-url="/profil?id={{ row.0 }}">
+                <td><img src="{{ row.7 }}" height="60" width="80"></img></td>
                 <td><h4 style='text-align: center'>{{ row.1 }}</h></td>
                 <td><h4 style='text-align: center'>{{ row.2 }}</h></td>
                 <td><h4 style='text-align: center'>{{ row.3 }}</h></td>
                 <td><h4 style='text-align: center'>{{ row.4 }}</h></td>
-                <td><h3 style='text-align: center'><strong>{{ row.5 }}</strong></h></td>
+                <td><h4 style='text-align: center'>{{ row.5 }}</h></td>
+                <td><h3 style='text-align: center'><strong>{{ row.6 }}</strong></h></td>
             </tr>
         {% endfor %}
       </tbody>
@@ -33,4 +43,6 @@
     </div>
 
     </div><!-- /.container -->
+</body>
+</html>
 {% endblock %}
