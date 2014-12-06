@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from flask import Flask, render_template, request
-from flask_bootstrap import Bootstrap
 from flaskext.mysql import MySQL
 from datetime import date
 import re
@@ -10,7 +9,6 @@ def create_app():
     # Initializing the app and Mysql connection
     mysql = MySQL()
     app = Flask(__name__)
-    Bootstrap(app)
     #TODO read these from a config file
     app.config['MYSQL_DATABASE_USER'] = 'brutarie'
     app.config['MYSQL_DATABASE_PASSWORD'] = 'm!tItic@'
