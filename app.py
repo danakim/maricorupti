@@ -4,17 +4,19 @@ from flask import Flask, render_template, request
 from flaskext.mysql import MySQL
 from datetime import date
 import re
+import ConfigParser
 
 def create_app():
     # Initializing the app and Mysql connection
     mysql = MySQL()
     app = Flask(__name__)
-    #TODO read these from a config file
-    app.config['MYSQL_DATABASE_USER'] = 'brutarie'
-    app.config['MYSQL_DATABASE_PASSWORD'] = 'm!tItic@'
-    app.config['MYSQL_DATABASE_DB'] = 'maricorupti'
-    app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-    ###
+    config = ConfigParser.ConfigParser()
+    config.read('db.ini')
+    app.config['MYSQL_DATABASE_USER'] = config.get('mysql', 'user')
+    app.config['MYSQL_DATABASE_PASSWORD'] = config.get('mysql', 'password')
+    app.config['MYSQL_DATABASE_DB'] = config.get('mysql', 'database')
+    app.config['MYSQL_DATABASE_HOST'] = config.get('mysql', 'host')
+
     mysql.init_app(app)
     cursor = mysql.connect().cursor()
 
@@ -30,6 +32,10 @@ def create_app():
         total_dosare_cu_executare = cursor.fetchone()
         cursor.execute("SELECT COUNT(id) from dosare_corupti where executare=0")
         total_dosare_fara_executare = cursor.fetchone()
+        cursor.execute("SELECT MAX(ani_inchisoare) from dosare_corupti")
+        pedeapsa_maxima = cursor.fetchone()
+        cursor.execute("SELECT MAX(durata_dosar) from dosare_corupti")
+        dosar_maxim = cursor.fetchone()
 
         # Send all the variables to the template
         return render_template(
@@ -37,7 +43,9 @@ def create_app():
             ultima_condamnare=ultima_condamnare.days,
             total_dosare=total_dosare[0],
             total_dosare_cu_executare=total_dosare_cu_executare[0],
-            total_dosare_fara_executare=total_dosare_fara_executare[0]
+            total_dosare_fara_executare=total_dosare_fara_executare[0],
+            pedeapsa_maxima=pedeapsa_maxima[0],
+            dosar_maxim=dosar_maxim[0]
             )
         cursor.close ()
 
