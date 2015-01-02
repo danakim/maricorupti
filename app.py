@@ -25,25 +25,25 @@ def create_app():
         if request.args.get('filtru'):
             return redirect("/dosare?filtru=" + request.args.get('filtru'))
         else:
-            cursor.execute("SELECT MAX(data_condamnarii) from dosare_corupti")
-            data_condamnarii = cursor.fetchone()
+            cursor.execute("SELECT id, data_condamnarii FROM dosare_corupti ORDER BY data_condamnarii DESC limit 1")
+            data_condamnarii = cursor.fetchall()
             today = date.today()
-            ultima_condamnare = today - data_condamnarii[0]
+            ultima_condamnare = today - data_condamnarii[0][1]
             cursor.execute("SELECT COUNT(id) from dosare_corupti")
             total_dosare = cursor.fetchone()
             cursor.execute("SELECT COUNT(id) from dosare_corupti where executare=1")
             total_dosare_cu_executare = cursor.fetchone()
             cursor.execute("SELECT COUNT(id) from dosare_corupti where executare=0")
             total_dosare_fara_executare = cursor.fetchone()
-            cursor.execute("SELECT MAX(ani_inchisoare) from dosare_corupti")
-            pedeapsa_maxima = cursor.fetchone()
-            cursor.execute("SELECT MAX(durata_dosar) from dosare_corupti")
-            dosar_maxim = cursor.fetchone()
+            cursor.execute("SELECT id, ani_inchisoare FROM dosare_corupti ORDER BY ani_inchisoare DESC limit 1")
+            pedeapsa_maxima = cursor.fetchall()
+            cursor.execute("SELECT id, durata_dosar FROM dosare_corupti ORDER BY durata_dosar DESC limit 1")
+            dosar_maxim = cursor.fetchall()
 
         # Send all the variables to the template
         return render_template(
             'index.html',
-            ultima_condamnare=ultima_condamnare.days,
+            ultima_condamnare=[data_condamnarii[0][0], ultima_condamnare.days],
             total_dosare=total_dosare[0],
             total_dosare_cu_executare=total_dosare_cu_executare[0],
             total_dosare_fara_executare=total_dosare_fara_executare[0],

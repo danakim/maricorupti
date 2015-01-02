@@ -4,6 +4,13 @@
 
 {% block content %}
 <body style="padding-top: 0px">
+<script>
+jQuery(function($) {
+  $('#stats').delegate('#stats-row', 'click', function() {
+    window.location = $(this).data('url')
+  });
+});
+</script>
 {% include "navbar.html" %}
     <!-- Carousel
     ================================================== -->
@@ -58,18 +65,18 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div style="margin-top: -100px" class="container marketing">
-      <div class="row">
-        <div class="col-md-4">
-          <h2 class="featurette-heading" style="text-align: center;"><small>{{ pedeapsa_maxima }} ani</h2></small>
+    <div id="stats" class="container marketing">
+      <div class="row" style="margin-top: -120px; margin-bottom: -50px;">
+        <div id="stats-row" class="col-md-4" style="cursor: pointer; cursor: hand;" data-url="/profil?id={{ pedeapsa_maxima.0 }}">
+          <h2 class="featurette-heading" style="text-align: center;"><small>{{ pedeapsa_maxima.1 }} ani</h2></small>
           <p class="lead" style="text-align: center"><small>Cea mai lunga pedeapsa</small></p>
         </div>
-        <div class="col-md-4">
-          <h1 class="featurette-heading" style="text-align: center;"><strong>{{ ultima_condamnare }} zile</h1></strong>
+        <div id="stats-row" class="col-md-4" style="cursor: pointer; cursor: hand;" data-url="/profil?id={{ ultima_condamnare.0 }}">
+          <h1 class="featurette-heading" style="text-align: center;"><strong>{{ ultima_condamnare.1 }} zile</h1></strong>
           <p class="lead" style="text-align: center">De la ultima condamnare</p>
         </div>
-        <div class="col-md-4">
-          <h2 class="featurette-heading" style="text-align: center;"><small>{{ dosar_maxim }} zile</h2></small>
+        <div id="stats-row" class="col-md-4" style="cursor: pointer; cursor: hand;" data-url="/profil?id={{ dosar_maxim.0 }}">
+          <h2 class="featurette-heading" style="text-align: center;"><small>{{ dosar_maxim.1 }} zile</h2></small>
           <p class="lead" style="text-align: center"><small>Cel mai lung dosar</small></p>
         </div>
       </div>
@@ -77,21 +84,21 @@
 
       <hr class="featurette-divider">
 
-      <div class="row featurette">
+      <div class="row featurette" style="margin-top: -50px; margin-bottom: -50px">
         <div class="col-md-7">
           <h2 class="featurette-heading"><span class="text-muted">Condamnari</span> cu executare</h2>
           <p class="lead">Din totalul de {{ total_dosare }} dosare, {{ total_dosare_cu_executare }} au fost inchise cu condamnari cu executare.</p>
         </div>
-        <div class="col-md-5">
-          <a href="/dosare?filtru=cu_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/KafUIpg.png"></a>
+        <div class="col-md-5" style="padding-left: 150px">
+          <a href="/dosare?filtru=cu_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/UPXh6ib.png"></a>
         </div>
       </div>
 
       <hr class="featurette-divider">
 
-      <div class="row featurette">
+      <div class="row featurette" style="margin-top: -50px; margin-bottom: -50px">
         <div class="col-md-5">
-          <a href="/dosare?filtru=fara_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/aDoAIp3.png"></a>
+          <a href="/dosare?filtru=fara_executare"><img class="featurette-image img-responsive" src="http://i.imgur.com/K990QRT.png"></a>
         </div>
         <div class="col-md-7">
           <h2 class="featurette-heading"><span class="text-muted">Condamnari</span> cu suspendare</h2>
@@ -101,7 +108,7 @@
 
       <hr class="featurette-divider">
 
-      <div class="row featurette">
+      <div class="row featurette" style="margin-top: -50px; margin-bottom: -50px">
         <div class="col-md-7">
           <h2 class="featurette-heading"><span class="text-muted">Condamnari</span> in partidele politice</h2>
           <p class="lead">Vezi cati politicieni din fiecare partid au fost condamnati in dosare de coruptie</p>
