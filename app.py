@@ -56,13 +56,13 @@ def create_app():
     def dosare():
         filtru = request.args.get('filtru')
         if filtru == 'cu_executare':
-            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url from dosare_corupti where executare=1")
+            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti where executare=1")
         elif filtru == 'fara_executare':
-            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url from dosare_corupti where executare=0")
+            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti where executare=0")
         elif filtru in ['nume', 'functie_publica', 'partid_1', 'fapta', 'data_condamnarii', 'durata_dosar', 'ani_inchisoare']:
-            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url from dosare_corupti order by " + filtru)
+            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti order by " + filtru)
         else:
-            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url from dosare_corupti WHERE (nume like '%" + filtru + "%' or prenume like '%" + filtru + "%' or functie_publica like '%" + filtru + "%' or partid_1 like '%" + filtru + "%' or fapta like '%" + filtru + "%') order by nume")
+            cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti WHERE (nume like '%" + filtru + "%' or prenume like '%" + filtru + "%' or functie_publica like '%" + filtru + "%' or partid_1 like '%" + filtru + "%' or fapta like '%" + filtru + "%') order by nume")
         dosare = cursor.fetchall()
 
         # Send all the variables to the template

@@ -40,28 +40,35 @@ $(document).ready(function() {
 {% include "navbar.html" %}
 
     <div class="container marketing">
+    <a href="/dosare?filtru=cu_executare" class="btn btn-danger" role="button">Cu executare</a>
+    <a href="/dosare?filtru=fara_executare" class="btn btn-success" role="button">Cu suspendare</a>
     <table class="table table-hover table-bordered table-responsive" id="table-dosare">
     <thead>
         <tr>
           <th></th>
-          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Nume</h></th>
-          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Prenume</h></th>
-          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Funcție publică</h></th>
-          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Partid</h></th>
-          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Fapta</h></th>
-          <th style='background-color: #F3F3F3;'><h5 style='text-align: center'>Ani pedeapsa</h></th>
+          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Nume</h></th>
+          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Prenume</h></th>
+          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Funcție publică</h></th>
+          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Partid</h></th>
+          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Fapta</h></th>
+          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Ani pedeapsa</h></th>
         </tr>
       </thead>
       <tbody>
         {% for row in dosare %}
-            <tr data-url="/profil?id={{ row.0 }}" id="data-row">
+            {% if row.8 == 1 %}
+                {% set background = '#D9534F' %}
+            {% elif row.8 == 0 %}
+                {% set background = '#95CC92' %}
+            {% endif %}
+            <tr data-url="/profil?id={{ row.0 }}" id="data-row" style="cursor: pointer; cursor: hand;">
                 <td><img src="{{ row.7 }}" height="60" width="80"></img></td>
-                <td><h4 style='text-align: center'>{{ row.1 }}</h></td>
-                <td><h4 style='text-align: center'>{{ row.2 }}</h></td>
-                <td><h4 style='text-align: center'>{{ row.3 }}</h></td>
-                <td><h4 style='text-align: center'>{{ row.4 }}</h></td>
-                <td><h4 style='text-align: center'>{{ row.5 }}</h></td>
-                <td><h3 style='text-align: center'><strong>{{ row.6 }}</strong></h></td>
+                <td><h5 style='text-align: center'>{{ row.1 }}</h></td>
+                <td><h5 style='text-align: center'>{{ row.2 }}</h></td>
+                <td><h5 style='text-align: center'>{{ row.3 }}</h></td>
+                <td><h5 style='text-align: center'>{{ row.4 }}</h></td>
+                <td><h5 style='text-align: center'>{{ row.5 }}</h></td>
+                <td style='background-color: {{ background }}'><h4 style='text-align: center'><strong>{{ row.6 }}</strong></h></td>
             </tr>
         {% endfor %}
       </tbody>
