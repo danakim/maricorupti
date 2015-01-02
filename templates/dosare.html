@@ -1,16 +1,42 @@
 {% block head %}
 {% include "head.html" %}
+<!-- Datatables still need to have searching enabled but let's not display it any more -->
+<style>
+.dataTables_filter {
+   display: none;
+}
+</style>
 {% endblock %}
 
 {% block content %}
 <body>
+<!-- This script will allow us to click on entire rows in the table -->
 <script>
 jQuery(function($) {
-  $('#table-dosare').delegate('tr', 'click', function() {
+  $('#table-dosare').delegate('#data-row', 'click', function() {
     window.location = $(this).data('url')
   });
 });
 </script>
+<!-- This script will initialise the table using the datatables plugin -->
+<script>
+$(document).ready(function() {
+    $('#table-dosare').dataTable( {
+        "paging":   false,
+        "info":     false,
+    });
+});
+</script>
+<!-- This script will use the datatables API to allow filtering to any other search box in the page -->
+<script>
+$(document).ready(function() {
+    var dataTable = $('#table-dosare').dataTable();
+    $("#searchbox").keyup(function() {
+        dataTable.fnFilter(this.value);
+    });
+});
+</script>
+
 {% include "navbar.html" %}
 
     <div class="container marketing">
@@ -28,7 +54,7 @@ jQuery(function($) {
       </thead>
       <tbody>
         {% for row in dosare %}
-            <tr data-url="/profil?id={{ row.0 }}">
+            <tr data-url="/profil?id={{ row.0 }}" id="data-row">
                 <td><img src="{{ row.7 }}" height="60" width="80"></img></td>
                 <td><h4 style='text-align: center'>{{ row.1 }}</h></td>
                 <td><h4 style='text-align: center'>{{ row.2 }}</h></td>
