@@ -1,0 +1,16 @@
+.btn-pdl {
+  background-color: hsl(36, 100%, 48%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f49200", endColorstr="#f49200");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#f49200), to(#f49200));
+  background-image: -moz-linear-gradient(top, #f49200, #f49200);
+  background-image: -ms-linear-gradient(top, #f49200, #f49200);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f49200), color-stop(100%, #f49200));
+  background-image: -webkit-linear-gradient(top, #f49200, #f49200);
+  background-image: -o-linear-gradient(top, #f49200, #f49200);
+  background-image: linear-gradient(#f49200, #f49200);
+  border-color: #f49200 #f49200 hsl(36, 100%, 48%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+  -webkit-font-smoothing: antialiased;
+}
