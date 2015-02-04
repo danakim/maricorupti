@@ -86,19 +86,35 @@
   -webkit-font-smoothing: antialiased;
 }
 .btn-pntcd {
-  background-color: hsl(51, 85%, 47%) !important;
+  background-color: hsl(0, 100%, 0%) !important;
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ddbf11", endColorstr="#ddbf11");
-  background-image: -khtml-gradient(linear, left top, left bottom, from(#ddbf11), to(#ddbf11));
-  background-image: -moz-linear-gradient(top, #ddbf11, #ddbf11);
-  background-image: -ms-linear-gradient(top, #ddbf11, #ddbf11);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ddbf11), color-stop(100%, #ddbf11));
-  background-image: -webkit-linear-gradient(top, #ddbf11, #ddbf11);
-  background-image: -o-linear-gradient(top, #ddbf11, #ddbf11);
-  background-image: linear-gradient(#ddbf11, #ddbf11);
-  border-color: #ddbf11 #ddbf11 hsl(51, 85%, 47%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#000000");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#000000), to(#000000));
+  background-image: -moz-linear-gradient(top, #000000, #000000);
+  background-image: -ms-linear-gradient(top, #000000, #000000);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(top, #000000, #000000);
+  background-image: -o-linear-gradient(top, #000000, #000000);
+  background-image: linear-gradient(#000000, #000000);
+  border-color: #000000 #000000 hsl(0, 100%, 0%);
   color: #fff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+  -webkit-font-smoothing: antialiased;
+}
+.btn-fara {
+  background-color: hsl(290, 39%, 96%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f7f0f8", endColorstr="#f7f0f8");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#f7f0f8), to(#f7f0f8));
+  background-image: -moz-linear-gradient(top, #f7f0f8, #f7f0f8);
+  background-image: -ms-linear-gradient(top, #f7f0f8, #f7f0f8);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f7f0f8), color-stop(100%, #f7f0f8));
+  background-image: -webkit-linear-gradient(top, #f7f0f8, #f7f0f8);
+  background-image: -o-linear-gradient(top, #f7f0f8, #f7f0f8);
+  background-image: linear-gradient(#f7f0f8, #f7f0f8);
+  border-color: #f7f0f8 #f7f0f8 hsl(290, 39%, 96%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.00);
   -webkit-font-smoothing: antialiased;
 }
 </style>
@@ -106,27 +122,28 @@
 
 {% block content %}
 <body>
-<!-- This script will allow us to click on entire rows in the table -->
 <script>
-jQuery(function($) {
-  $('#table-dosare').delegate('#data-row', 'click', function() {
-    window.location = $(this).data('url')
-  });
+// These scripts will enable the bootstrap type tooltips and popovers
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
 });
-</script>
-<!-- This script will initialise the table using the datatables plugin -->
-<script>
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
+
+// This script will allow us to click on entire rows in the table
+jQuery(function($) {
+    $('#table-dosare').delegate('#data-row', 'click', function() {
+        window.location = $(this).data('url')
+    });
+});
+
+// This script will use the datatables API to allow filtering to any other search box in the page
 $(document).ready(function() {
-    $('#table-dosare').dataTable( {
+    var dataTable = $('#table-dosare').dataTable({
         "paging":   false,
         "info":     false,
     });
-});
-</script>
-<!-- This script will use the datatables API to allow filtering to any other search box in the page -->
-<script>
-$(document).ready(function() {
-    var dataTable = $('#table-dosare').dataTable();
     $("#searchbox").keyup(function() {
         dataTable.fnFilter(this.value);
     });
@@ -135,52 +152,62 @@ $(document).ready(function() {
 
 {% include "navbar.html" %}
 
+    {% set infotext = 'Poți filtra lista după capul de tabel.
+Fă click pe orice condamnat să vezi mai multe despre cazul său.
+Culoarea anilor de închisoare semnifică „cu executare” - roșu, respectiv „cu suspendare” - verde' %}
+
     <div class="container marketing">
-    <!--<div class="pull-right">
-        <a href="/dosare?filtru=cu_executare" class="btn btn-xs btn-danger" role="button">Cu executare</a>
-        <a href="/dosare?filtru=fara_executare" class="btn btn-xs btn-success" role="button">Cu suspendare</a>
-    </div>-->
     <table class="table table-hover table-bordered table-responsive" id="table-dosare">
     <thead>
         <tr>
-          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Poza</h></th>
-          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Nume</h></th>
-          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Funcție publică</h></th>
-          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Partid</h></th>
-          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Fapta</h></th>
-          <th style='background-color: #F3F3F3;'><h4 style='text-align: center'>Ani pedeapsa</h><div class="row"><button class="btn btn-xs btn-danger col-md-6" role="button">Executare</button> <button class="btn btn-xs btn-success col-md-6" role="button">Suspendare</button></div></th>
+          <th style='background-color: #FFECB7;'><h4 style='text-align: center'><button style='border: none; background: none;' type="button" data-toggle="popover" data-trigger="focus" title="Ghid" data-content="{{ infotext }}"><img src="http://i.imgur.com/f0WX3Vh.png" height="44" width="50"></button</h></th>
+          <th style='background-color: #FFECB7;'><h4 style='text-align: center'>Nume</h></th>
+          <th style='background-color: #FFECB7;'><h4 style='text-align: center'>Funcție publică</h></th>
+          <th style='background-color: #FFECB7;'><h4 style='text-align: center'>Partid</h></th>
+          <th style='background-color: #FFECB7;'><h4 style='text-align: center'>Fapta</h></th>
+          <th style='background-color: #FFECB7;'><h4 style='text-align: center'>Ani pedeapsa</h></th>
         </tr>
       </thead>
       <tbody>
         {% for row in dosare %}
             {% if row.4 == 'PDL' %}
                 {% set butonpartid = 'btn-pdl' %}
+                {% set numepartid = 'PDL' %}
             {% elif row.4 == 'PSD' %}
                 {% set butonpartid = 'btn-psd' %}
+                {% set numepartid = 'PSD' %}
             {% elif row.4 == 'PNL' %}
                 {% set butonpartid = 'btn-pnl' %}
+                {% set numepartid = 'PNL' %}
             {% elif row.4 == 'PC' %}
                 {% set butonpartid = 'btn-pc' %}
+                {% set numepartid = 'PC' %}
             {% elif row.4 == 'UDMR' %}
                 {% set butonpartid = 'btn-udmr' %}
+                {% set numepartid = 'UDMR' %}
             {% elif row.4 == 'PNTCD' %}
                 {% set butonpartid = 'btn-pntcd' %}
+                {% set numepartid = 'PNTCD' %}
             {% else %}
-                {% set butonpartid = 'btn-default' %}
+                {% set butonpartid = 'btn-fara' %}
+                {% set numepartid = 'Fara' %}
             {% endif %}
 
             {% if row.8 == 1 %}
                 {% set butonani = 'btn-danger' %}
+                {% set executare = 'Cu executare' %}
             {% elif row.8 == 0 %}
                 {% set butonani = 'btn-success' %}
+                {% set executare = 'Fara executare' %}
+            {% elif row.8 == 0 %}
             {% endif %}
             <tr data-url="/profil?id={{ row.0 }}" id="data-row" style="cursor: pointer; cursor: hand;">
                 <td><img src="{{ row.7 }}" height="60" width="80"></img></td>
                 <td><h5 style='text-align: center'>{{ row.2 }} {{ row.1 }}</h></td>
                 <td><h5 style='text-align: center'>{{ row.3 }}</h></td>
-                <td><h5 style='text-align: center'><button class="btn {{ butonpartid }}" type="button">{{ row.4 }}</button></h></td>
-                <td><h5 style='text-align: center'>{{ row.5 }}</h></td>
-                <td><h4 style='text-align: center'><button class="btn {{ butonani }}" type="button">{{ row.6 }}</button></h></td>
+                <td><h5 style='text-align: center'><button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button></h></td>
+                <td><h5 style='text-align: left'>{{ row.5 }}</h></td>
+                <td><h4 style='text-align: center'><button class="btn {{ butonani }}" type="button" data-toggle="tooltip" data-placement="right" title="{{ executare }}">{{ row.6 }}</button></h></td>
             </tr>
         {% endfor %}
       </tbody>
