@@ -1,23 +1,50 @@
 {% block head %}
 {% include "head.html" %}
+<style>
+{% include "custom-buttons.css" %}
+</style>
 {% endblock %}
 
 {% block content %}
 <body>
-{% include "navbar.html" %}
-    <div class="container marketing">
+    {% include "navbar.html" %}
+
+    {% if profil.4 == 'PDL' %}
+        {% set butonpartid = 'btn-pdl' %}
+        {% set numepartid = 'PDL' %}
+    {% elif profil.4 == 'PSD' %}
+        {% set butonpartid = 'btn-psd' %}
+        {% set numepartid = 'PSD' %}
+    {% elif profil.4 == 'PNL' %}
+        {% set butonpartid = 'btn-pnl' %}
+        {% set numepartid = 'PNL' %}
+    {% elif profil.4 == 'PC' %}
+        {% set butonpartid = 'btn-pc' %}
+        {% set numepartid = 'PC' %}
+    {% elif profil.4 == 'UDMR' %}
+        {% set butonpartid = 'btn-udmr' %}
+        {% set numepartid = 'UDMR' %}
+    {% elif profil.4 == 'PNTCD' %}
+        {% set butonpartid = 'btn-pntcd' %}
+        {% set numepartid = 'PNTCD' %}
+    {% else %}
+        {% set butonpartid = 'btn-fara' %}
+        {% set numepartid = 'N/A' %}
+    {% endif %}
+
+    <div class="container marketing" style="padding-top: 20px">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <img width="100%" height="90%" src="{{ profil.7 }}">
             </div>
             <div class="col-md-6">
-                <h2> Descrierea faptei: </h2>
+                <h2> Rezumatul dosarului: </h2>
                 <h5> {{ profil.6 }} </h5>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <h2> {{ profil.2 }} {{ profil.1 }} {{ profil.4 }} </h2>
+                <h2> {{ profil.2 }} {{ profil.1 }} <button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button> </h2>
             </div>
         </div>
         <div class="row">
