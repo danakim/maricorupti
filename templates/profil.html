@@ -5,7 +5,42 @@
 {% block content %}
 <body>
 {% include "navbar.html" %}
-
+    <div class="container marketing">
+        <div class="row">
+            <div class="col-md-4">
+                <img width="100%" height="90%" src="{{ profil.7 }}">
+            </div>
+            <div class="col-md-6">
+                <h2> Descrierea faptei: </h2>
+                <h5> {{ profil.6 }} </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h2> {{ profil.2 }} {{ profil.1 }} {{ profil.4 }} </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4> {{ profil.3 }} </h4>
+            </div>
+        </div>
+        <div class="row">
+            {% if profil.9 == 1 %}
+                 {% set executare = 'cu executare' %}
+            {% else %}
+                 {% set executare = 'fara executare' %}
+            {% endif %}
+            <div class="col-lg-6">
+                <h5> {{ profil.7 }} ani {{ executare }} pentru {{ profil.5 }}  </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h5> A primit sentinta finala dupa {{ profil.10 }} zile </h5>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 {% endblock %}

@@ -82,8 +82,12 @@ def dosare():
 # 'Profile' page
 @app.route('/profil')
 def profil():
+    id = request.args.get('id')
+    cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,descriere_fapta,ani_inchisoare,img_url,executare,durata_dosar from dosare_corupti where id='" + id + "'")
+    profil = cursor.fetchall()
     return render_template(
-        'profil.html'
+        'profil.html',
+        profil=profil[0]
         )
 
 # 'Despre' page
