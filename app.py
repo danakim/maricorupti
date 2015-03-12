@@ -27,6 +27,8 @@ db_config = {
   'password': config.get('mysql', 'password'),
   'unix_socket': config.get('mysql', 'socket'),
   'database': config.get('mysql', 'database'),
+  'connection_timeout': float(config.get('mysql', 'conn_timeout')),
+  'pool_size': float(config.get('mysql', 'conn_pool_size')),
 }
 cnx = mysql.connector.connect(**db_config)
 cursor = cnx.cursor()
@@ -63,7 +65,7 @@ def home_page():
         dosar_maxim=dosar_maxim[0]
         )
 
-    cursor.close ()
+    cursor.close()
 
 # 'Dosare' page
 @app.route('/dosare')
@@ -85,7 +87,7 @@ def dosare():
         dosare=dosare
         )
 
-    cursor.close ()
+    cursor.close()
 
 # 'Profile' page
 @app.route('/profil')
@@ -97,6 +99,8 @@ def profil():
         'profil.html',
         profil=profil[0]
         )
+
+    cursor.close()
 
 # 'Despre' page
 @app.route('/despre')
@@ -110,3 +114,4 @@ def despre():
 # using uwsgi, so in theory no need for this
 if __name__ == '__main__':
     app().run(debug=True, host='0.0.0.0')
+    cnx.close()
