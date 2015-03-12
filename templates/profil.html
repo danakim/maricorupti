@@ -9,22 +9,22 @@
 <body>
     {% include "navbar.html" %}
 
-    {% if profil.4 == 'PDL' %}
+    {% if profil.5 == 'PDL' %}
         {% set butonpartid = 'btn-pdl' %}
         {% set numepartid = 'PDL' %}
-    {% elif profil.4 == 'PSD' %}
+    {% elif profil.5 == 'PSD' %}
         {% set butonpartid = 'btn-psd' %}
         {% set numepartid = 'PSD' %}
-    {% elif profil.4 == 'PNL' %}
+    {% elif profil.5 == 'PNL' %}
         {% set butonpartid = 'btn-pnl' %}
         {% set numepartid = 'PNL' %}
-    {% elif profil.4 == 'PC' %}
+    {% elif profil.5 == 'PC' %}
         {% set butonpartid = 'btn-pc' %}
         {% set numepartid = 'PC' %}
-    {% elif profil.4 == 'UDMR' %}
+    {% elif profil.5 == 'UDMR' %}
         {% set butonpartid = 'btn-udmr' %}
         {% set numepartid = 'UDMR' %}
-    {% elif profil.4 == 'PNTCD' %}
+    {% elif profil.5 == 'PNTCD' %}
         {% set butonpartid = 'btn-pntcd' %}
         {% set numepartid = 'PNTCD' %}
     {% else %}
@@ -32,41 +32,43 @@
         {% set numepartid = 'N/A' %}
     {% endif %}
 
+    {% if profil.12 == 1 %}
+        {% set executare = 'cu executare' %}
+        {% set butonexecutare = 'btn-danger' %}
+    {% else %}
+        {% set executare = 'fara executare' %}
+        {% set butonexecutare = 'btn-success' %}
+    {% endif %}
+
     <div class="container marketing" style="padding-top: 20px">
+    <div class="panel panel-default">
+    <div class="panel-body">
         <div class="row">
             <div class="col-md-3">
-                <img width="100%" height="90%" src="{{ profil.7 }}">
+                <!--<img width="100%" height="90%" src="{{ profil.22 }}">-->
+                <div style='background-color: black; color: white; font-size: x-large; text-align: center; border-radius: 7px;'><img width="100%" height="90%" style='border-radius: 7px' src="{{ profil.22 }}">{{ profil.3 }} {{ profil.2 }}</div>
+                <div style='padding-top: 5px'><button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button> <strong>{{ profil.4 }}</strong></div>
+                <div>{{ profil.7 }}</div>
+                <div style='padding-top: 5px'><button class="btn btn-ani" type="button">{{ profil.11 }} ani</button> <button class="btn {{ butonexecutare }}" type="button">{{ executare }}</button></div>
+                <div><h4>Fapta: {{ profil.8 }}</h4></div>
+                <div>Prejudiciu: {{ profil.18 }}</div>
+                <div>Avere recuperata: {{ profil.19 }}</div>
+                <div>In inchisoare: XXX</div>
+                <div>A primit sentinta finala dupa: {{ profil.10 }}</div>
+                <div>I s-a redus pedeapsa cu: {{ profil.13 }}</div>
+                <div>Mai are: XXX zile</div>
+                <div><strong>Link-uri utile:</strong><a href={{ profil.15 }}> Sursa presa </a> | <a href={{ profil.20 }}> Wikipedia </a></div>
             </div>
-            <div class="col-md-6">
-                <h2> Rezumatul dosarului: </h2>
-                <h5> {{ profil.6 }} </h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h2> {{ profil.2 }} {{ profil.1 }} <button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button> </h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h4> {{ profil.3 }} </h4>
-            </div>
-        </div>
-        <div class="row">
-            {% if profil.9 == 1 %}
-                 {% set executare = 'cu executare' %}
-            {% else %}
-                 {% set executare = 'fara executare' %}
-            {% endif %}
-            <div class="col-lg-6">
-                <h5> {{ profil.7 }} ani {{ executare }} pentru {{ profil.5 }}  </h5>
+            <div class="col-md-8">
+                <h2> Dosarul {{ profil.1 }} </h2>
+                <h4> {{ profil.16 }} </h4>
+                <br>
+                <div><h4>Observatii:</h4></div>
+                <div>{{ profil.17 }}</div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h5> A primit sentinta finala dupa {{ profil.10 }} zile </h5>
-            </div>
-        </div>
+    </div>
+    </div>
     </div>
 </body>
 </html>
