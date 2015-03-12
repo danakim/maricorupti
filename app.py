@@ -1,27 +1,35 @@
 #!/usr/bin/python
 
 from flask import Flask, render_template, request, redirect
-from flaskext.mysql import MySQL
 from datetime import date
 import re
 import ConfigParser
+import mysql.connector
+# This crap is needed to enforce utf-8 everywhere
+# http://stackoverflow.com/questions/5040532/python-ascii-codec-cant-decode-byte
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
-# Initializing the app and Mysql connection
-mysql = MySQL()
+# Initialize the app
 app = Flask(__name__)
 ## !! Turn debugging on - only for development !! ##
 app.debug = True
 ##
+
 # Read the config file for the mysql credentials
 config = ConfigParser.ConfigParser()
 config.read('db.ini')
-app.config['MYSQL_DATABASE_USER'] = config.get('mysql', 'user')
-app.config['MYSQL_DATABASE_PASSWORD'] = config.get('mysql', 'password')
-app.config['MYSQL_DATABASE_DB'] = config.get('mysql', 'database')
-app.config['MYSQL_DATABASE_HOST'] = config.get('mysql', 'host')
 
-mysql.init_app(app)
-cursor = mysql.connect().cursor()
+# Configure the mysql connection
+db_config = {
+  'user': config.get('mysql', 'user'),
+  'password': config.get('mysql', 'password'),
+  'unix_socket': config.get('mysql', 'socket'),
+  'database': config.get('mysql', 'database'),
+}
+cnx = mysql.connector.connect(**db_config)
+cursor = cnx.cursor()
 
 # Landing page
 @app.route('/')
