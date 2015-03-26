@@ -5,6 +5,7 @@
 </style>
 {% endblock %}
 
+
 {% block content %}
 <body>
     {% include "navbar.html" %}
@@ -36,7 +37,7 @@
         {% set executare = 'cu executare' %}
         {% set butonexecutare = 'btn-danger' %}
     {% else %}
-        {% set executare = 'fara executare' %}
+        {% set executare = 'cu suspendare' %}
         {% set butonexecutare = 'btn-success' %}
     {% endif %}
 
@@ -45,21 +46,23 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-3">
-                <!--<img width="100%" height="90%" src="{{ profil.22 }}">-->
-                <div style='background-color: black; color: white; font-size: x-large; text-align: center; border-radius: 7px;'><img width="100%" height="90%" style='border-radius: 7px' src="{{ profil.22 }}">{{ profil.3 }} {{ profil.2 }}</div>
-                <div style='padding-top: 5px'><button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button> <strong>{{ profil.4 }}</strong></div>
+                <div style='background-color: black; color: white; font-size: 200%; text-align: left; border-radius: 7px; padding-left: 10px; padding-right: 10px; padding-bottom: 10px'>{{ profil.3.upper() }} {{ profil.2.upper() }}<img width="100%" height="90%" style='border-radius: 7px;' src="{{ profil.22 }}"></div>
+                <div style='padding-top: 5px; padding-bottom: 5px'><button class="btn btn-ani" type="button" style='font-size: 160%;'>{{ profil.11 }} ani</button> <button class="btn {{ butonexecutare }}" type="button" style='font-size: 160%;'>{{ executare }}</button></div>
+            </div>
+            <div class="col-md-3">
+                <div><strong>{{ profil.4 }}</strong></div>
                 <div>{{ profil.7 }}</div>
-                <div style='padding-top: 5px'><button class="btn btn-ani" type="button">{{ profil.11 }} ani</button> <button class="btn {{ butonexecutare }}" type="button">{{ executare }}</button></div>
-                <div><h4>Fapta: {{ profil.8 }}</h4></div>
-                <div>Prejudiciu: {{ profil.18 }}</div>
+                <div style='padding-top: 5px; padding-bottom: 5px'> <button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button></div>
+                <div><strong>FAPTA: {{ profil.8 }}</strong></div>
+                <div><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>{{ profil.18 }}</div>
                 <div>Avere recuperata: {{ profil.19 }}</div>
                 <div>In inchisoare: XXX</div>
-                <div>A primit sentinta finala dupa: {{ profil.10 }}</div>
-                <div>I s-a redus pedeapsa cu: {{ profil.13 }}</div>
+                <div>A primit sentinta finala dupa: {{ profil.10 }} zile</div>
+                <div>I s-a redus pedeapsa cu: {{ profil.13 }} zile</div>
                 <div>Mai are: XXX zile</div>
                 <div><strong>Link-uri utile:</strong><a href={{ profil.15 }}> Sursa presa </a> | <a href={{ profil.20 }}> Wikipedia </a></div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <h2> Dosarul {{ profil.1 }} </h2>
                 <h4> {{ profil.16 }} </h4>
                 <br>
