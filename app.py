@@ -36,6 +36,10 @@ cursor = cnx.cursor()
 # Landing page
 @app.route('/')
 def home_page():
+    # Always try and reconnect to Mysql,
+    # the connection timeout may be expired
+    cnx.reconnect(attempts=3, delay=1)
+
     if request.args.get('filtru'):
         return redirect("/dosare?filtru=" + request.args.get('filtru'))
     else:
@@ -70,6 +74,10 @@ def home_page():
 # 'Dosare' page
 @app.route('/dosare')
 def dosare():
+    # Always try and reconnect to Mysql,
+    # the connection timeout may be expired
+    cnx.reconnect(attempts=3, delay=1)
+
     filtru = request.args.get('filtru')
     if filtru == 'cu_executare':
         cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti where executare=1")
@@ -92,6 +100,10 @@ def dosare():
 # 'Profile' page
 @app.route('/profil')
 def profil():
+    # Always try and reconnect to Mysql,
+    # the connection timeout may be expired
+    cnx.reconnect(attempts=3, delay=1)
+
     id = request.args.get('id')
     cursor.execute("SELECT * from dosare_corupti where id='" + id + "'")
     profil = cursor.fetchall()
@@ -105,6 +117,10 @@ def profil():
 # 'Despre' page
 @app.route('/despre')
 def despre():
+    # Always try and reconnect to Mysql,
+    # the connection timeout may be expired
+    cnx.reconnect(attempts=3, delay=1)
+
     return render_template(
         'despre.html'
         )
