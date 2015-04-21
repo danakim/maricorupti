@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block content %}
-<body>
+<body style="font-family: 'Open Sans', sans-serif;">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <script>
 // These scripts will enable the bootstrap type tooltips and popovers
 $(function () {
@@ -91,7 +92,7 @@ Culoarea anilor de închisoare semnifică „cu executare” - roșu, respectiv 
             {% elif row.8 == 0 %}
             {% endif %}
             <tr data-url="/profil?id={{ row.0 }}" id="data-row" style="cursor: pointer; cursor: hand;">
-                <td><img src="{{ row.7 }}" height="60" width="80"></img></td>
+                <td><img src="{{ row.7 }}" height="80" width="80"></img></td>
                 <td><h5 style='text-align: center'>{{ row.2 }} {{ row.1 }}</h></td>
                 <td><h5 style='text-align: center'>{{ row.3 }}</h></td>
                 <td><h5 style='text-align: center'><button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button></h></td>

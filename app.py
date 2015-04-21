@@ -8,6 +8,7 @@ import mysql.connector
 # This crap is needed to enforce utf-8 everywhere
 # http://stackoverflow.com/questions/5040532/python-ascii-codec-cant-decode-byte
 import sys
+from collections import defaultdict
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -78,7 +79,7 @@ def dosare():
     # the connection timeout may be expired
     cnx.reconnect(attempts=3, delay=1)
 
-    filtru = request.args.get('filtru')
+    filtru = request.args.get('filtru').lower()
     if filtru == 'cu_executare':
         cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti where executare=1")
     elif filtru == 'fara_executare':
@@ -86,7 +87,7 @@ def dosare():
     elif filtru in ['nume', 'functie_publica', 'partid_1', 'fapta', 'data_condamnarii', 'durata_dosar', 'ani_inchisoare']:
         cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti order by " + filtru)
     else:
-        cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti WHERE (nume like '%" + filtru + "%' or prenume like '%" + filtru + "%' or functie_publica like '%" + filtru + "%' or partid_1 like '%" + filtru + "%' or fapta like '%" + filtru + "%') order by nume")
+        cursor.execute("SELECT id,nume,prenume,functie_publica,partid_1,fapta,ani_inchisoare,img_url,executare from dosare_corupti WHERE (LOWER(nume) like %(filtru)s or LOWER(prenume) like %(filtru)s or LOWER(functie_publica) like %(filtru)s or LOWER(partid_1) like %(filtru)s or LOWER(fapta) like %(filtru)s) order by nume", {'filtru': '%' + filtru + '%'})
     dosare = cursor.fetchall()
 
     # Send all the variables to the template
@@ -124,6 +125,30 @@ def despre():
     return render_template(
         'despre.html'
         )
+
+@app.route('/statistici')
+def statistici():
+    cnx.reconnect(attempts=3, delay=1)
+    cursor.execute("SELECT * from dosare_corupti")
+    dosare = [dict(zip(cursor.column_names, r)) for r in cursor.fetchall()]
+
+    culoare_default = 'gray'
+    culoare = {
+        'PSD': 'red',
+    }
+
+    partide_count = defaultdict(int)
+    for d in dosare:
+        partide_count[d['partid_1'] or 'N/A'] += 1
+    partide = [(k, partide_count[k], culoare.get(k, culoare_default)) for k in partide_count]
+    partide.sort(key=lambda p: p[1], reverse=True)
+
+    return render_template(
+        'statistici.html',
+        dosare=dosare,
+        partide=partide,
+        )
+
 
 # This is only used when running the app via
 # flask's builtin webserver. We usually run this
