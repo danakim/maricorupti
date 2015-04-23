@@ -113,11 +113,21 @@ def profil():
     cnx.reconnect(attempts=3, delay=1)
 
     id = request.args.get('id')
+    cursor.execute("SELECT id, data_condamnarii FROM dosare_corupti WHERE NOT data_condamnarii = '0000-00-00' AND id='" + id + "'limit 1;")
+    data_condamnarii = cursor.fetchall()
+    cursor.execute("SELECT id, ani_inchisoare FROM dosare_corupti WHERE id='" + id + "'limit 1;")
+    zile_inchisoare = cursor.fetchall()
+    zile_inchisoare = int(zile_inchisoare[0][1]) * 365
+    today = date.today()
+    timp_condamnare = today - data_condamnarii[0][1]
+    zile_ramase = zile_inchisoare - timp_condamnare.days
     cursor.execute("SELECT * from dosare_corupti where id='" + id + "'")
     profil = cursor.fetchall()
     return render_template(
         'profil.html',
-        profil=profil[0]
+        profil=profil[0],
+        zile_ramase=zile_ramase,
+        timp_condamnare=timp_condamnare.days
         )
 
     cursor.close()
@@ -135,7 +145,10 @@ def despre():
 
 @app.route('/statistici')
 def statistici():
+    # Always try and reconnect to Mysql,
+    # the connection timeout may be expired
     cnx.reconnect(attempts=3, delay=1)
+
     cursor.execute("SELECT * from dosare_corupti")
     dosare = [dict(zip(cursor.column_names, r)) for r in cursor.fetchall()]
 
