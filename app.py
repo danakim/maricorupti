@@ -58,6 +58,12 @@ def home_page():
         pedeapsa_maxima = cursor.fetchall()
         cursor.execute("SELECT id, durata_dosar FROM dosare_corupti ORDER BY durata_dosar DESC limit 1")
         dosar_maxim = cursor.fetchall()
+        cursor.execute("SELECT id, prenume, nume, ani_inchisoare, executare, img_url_slider FROM dosare_corupti")
+        info_slider_pre = cursor.fetchall()
+        info_slider = []
+        for entry in info_slider_pre:
+            if entry[5]:
+                info_slider.append(entry)
 
     # Send all the variables to the template
     return render_template(
@@ -67,7 +73,8 @@ def home_page():
         total_dosare_cu_executare=total_dosare_cu_executare[0],
         total_dosare_fara_executare=total_dosare_fara_executare[0],
         pedeapsa_maxima=pedeapsa_maxima[0],
-        dosar_maxim=dosar_maxim[0]
+        dosar_maxim=dosar_maxim[0],
+        info_slider=info_slider
         )
 
     cursor.close()
