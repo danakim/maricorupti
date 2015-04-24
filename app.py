@@ -149,24 +149,63 @@ def statistici():
     # the connection timeout may be expired
     cnx.reconnect(attempts=3, delay=1)
 
+    # First chart data
     cursor.execute("SELECT * from dosare_corupti")
     dosare = [dict(zip(cursor.column_names, r)) for r in cursor.fetchall()]
-
     culoare_default = 'gray'
     culoare = {
-        'PSD': 'red',
+        'PSD': 'color: red',
+        'PNL': 'yellow',
+        'PDL': 'orange',
+        'UDMR': 'green',
+        'PC': 'blue',
+        'PNTCD': 'green',
+        'PP-DD': '#C292E1'
     }
-
     partide_count = defaultdict(int)
     for d in dosare:
         partide_count[d['partid_1'] or 'N/A'] += 1
     partide = [(k, partide_count[k], culoare.get(k, culoare_default)) for k in partide_count]
     partide.sort(key=lambda p: p[1], reverse=True)
 
+    # Second chart data
+    cursor.execute("SELECT COUNT(id) from dosare_corupti where executare=1")
+    total_dosare_cu_executare = cursor.fetchone()
+    cursor.execute("SELECT COUNT(id) from dosare_corupti where executare=0")
+    total_dosare_fara_executare = cursor.fetchone()
+
+    # Data boxes
+    cursor.execute("SELECT id, ani_inchisoare FROM dosare_corupti ORDER BY ani_inchisoare DESC limit 1")
+    pedeapsa_maxima = cursor.fetchall()
+    cursor.execute("SELECT id, durata_dosar FROM dosare_corupti ORDER BY durata_dosar DESC limit 1")
+    dosar_maxim = cursor.fetchall()
+    cursor.execute("SELECT id, durata_dosar FROM dosare_corupti WHERE NOT durata_dosar = 0 ORDER BY durata_dosar ASC limit 1")
+    dosar_minim = cursor.fetchall()
+    cursor.execute("SELECT count(distinct fapta), fapta FROM dosare_corupti")
+    fapta_des = cursor.fetchall()
+    total_condamnati = len(dosare)
+    ani_executare = 0
+    ani_suspendare = 0
+    for d in dosare:
+        if d['executare'] == 1:
+            ani_executare = ani_executare + d['ani_inchisoare']
+        else:
+            ani_suspendare = ani_suspendare + d['ani_inchisoare']
+
+    # Send it all to the template
     return render_template(
         'statistici.html',
         dosare=dosare,
         partide=partide,
+        total_condamnati=total_condamnati,
+        ani_executare=ani_executare,
+        ani_suspendare=ani_suspendare,
+        pedeapsa_maxima=pedeapsa_maxima[0],
+        dosar_maxim=dosar_maxim[0],
+        dosar_minim=dosar_minim[0],
+        fapta_des=fapta_des[0],
+        total_dosare_cu_executare=total_dosare_cu_executare[0],
+        total_dosare_fara_executare=total_dosare_fara_executare[0],
         )
 
 

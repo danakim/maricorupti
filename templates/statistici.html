@@ -8,37 +8,120 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <div class="container">
-{{ partide }}
-    {#{{ dosare }}#}
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+    <hr>
+    <div id="condamnari" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+    <hr>
+    <div id="executare" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+    <hr>
+    <div class="panel panel-default" style="min-width: 300px; min-height: 200px; max-width: 600px; margin: 0 auto">
+        <div class="panel-heading">
+            <h2 class="panel-title">Sumar</h2>
+        </div>
+        <div class="panel-body">
+            <div style="margin-top: 10px">Total condamnati: <span style="font-size: 100%" class="label label-default">{{ total_condamnati }}</span></div>
+            <div style="margin-top: 10px">Total ani cu executare: <span style="font-size: 100%" class="label label-default">{{ ani_executare }}</span></div>
+            <div style="margin-top: 10px">Total ani cu suspendare: <span style="font-size: 100%" class="label label-default">{{ ani_suspendare }}</span></div>
+        </div>
+    </div>
+    <hr>
+    <div class="panel panel-default" style="min-width: 300px; min-height: 200px; max-width: 600px; margin: 0 auto">
+        <div class="panel-heading">
+            <h2 class="panel-title">Superlative</h2>
+        </div>
+        <div class="panel-body">
+            <div style="margin-top: 10px"><a href="/profil?id={{ dosar_maxim.0 }}"> Cel mai lung dosar:</a><span style="font-size: 100%" class="label label-default">{{ dosar_maxim.1 }} zile</span></div>
+            <div style="margin-top: 10px"><a href="/profil?id={{ dosar_minim.0 }}"> Cel mai scurt dosar:</a><span style="font-size: 100%" class="label label-default">{{ dosar_minim.1 }} zile</span></div>
+            <div style="margin-top: 10px"><a href="/profil?id={{ pedeapsa_maxima.0 }}"> Cea mai mare pedeapsa:</a><span style="font-size: 100%" class="label label-default">{{ pedeapsa_maxima.1 }} ani</span></div>
+            <div style="margin-top: 10px">Cea mai des intalnita fapta: <span style="font-size: 100%" class="label label-default">{{ fapta_des.1 }}</span></div>
+        </div>
+        </div>
+    </div>
+    <hr>
 
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = new google.visualization.arrayToDataTable([['Partid', 'condamnari', {role: 'style'}]].concat({{ partide|tojson|safe }}));
-
-        // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':800,
-                       'height':500};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script>
+        $(function () {
+            $('#condamnari').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Condamnari pe Partide'
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Numar condamnari'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Condamnari',
+                    data: {{ partide|tojson|safe }},
+                    dataLabels: {
+                        enabled: true,
+                        rotation: -90,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        format: '{point.y:.0f}',
+                        y: 10, // 10 pixels down from the top
+                        style: {
+                            fontSize: '13px',
+                        }
+                    }
+                }]
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#executare').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: 'Executare vs suspendare'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Condamnari',
+                    data: [
+                    ['Cu executare', {{ total_dosare_cu_executare }}],
+                    ['Cu suspendare', {{ total_dosare_fara_executare }}],
+                    ]
+                }]
+            });
+        });
     </script>
 </div>
 </body>
