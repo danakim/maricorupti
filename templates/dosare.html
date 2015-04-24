@@ -92,7 +92,11 @@ Culoarea anilor de închisoare semnifică „cu executare” - roșu, respectiv 
             {% elif row.8 == 0 %}
             {% endif %}
             <tr data-url="/profil?id={{ row.0 }}" id="data-row" style="cursor: pointer; cursor: hand;">
+                {% if row.7 %}
                 <td><img src="{{ row.7 }}" height="80" width="80"></img></td>
+                {% else %}
+                <td><img src="/static/img/default_image.png" height="80" width="80"></img></td>
+                {% endif %}
                 <td><h5 style='text-align: center'>{{ row.2 }} {{ row.1 }}</h></td>
                 <td><h5 style='text-align: center'>{{ row.3 }}</h></td>
                 <td><h5 style='text-align: center'><button class="btn {{ butonpartid }}" type="button">{{ numepartid }}</button></h></td>
