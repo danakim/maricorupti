@@ -46,6 +46,12 @@
                 chart: {
                     type: 'column'
                 },
+                plotOptions: {
+                    column: {
+                        colorByPoint: true
+                    }
+                },
+                colors: ['#dbeab5'],
                 title: {
                     text: 'Condamnari pe Partide'
                 },
@@ -96,6 +102,7 @@
                 title: {
                     text: 'Executare vs suspendare'
                 },
+                colors: ['#dbeab5', '#323232'],
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
                 },
