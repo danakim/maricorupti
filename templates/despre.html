@@ -1,5 +1,10 @@
 {% block head %}
 {% include "head.html" %}
+<style>
+.panel-default > .panel-heading-custom {
+    background: #dbeab5;
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -10,24 +15,9 @@
 {% include "navbar.html" %}
 
 <div class="container">
-<div class="panel panel-default">
-  <div class="panel-heading">
-    Te așteptăm miercuri 17 iunie la petrecerea de lansare „Mari Corupți”. 
-  </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Cronologie</h3>
-  </div>
-  <div class="panel-body">
-    Toamna 2014 - se întețesc marii corupți condamnați, nici nu mai știm care când a intrat și câtă pedeapsă mai are de executat. Realizăm că trăim momente istorice în lupta anticorupție și vrem să le marcăm printr-un compendiu al marilor corupți, căci tare ne place să punem lucrurile în ordine. Facem ce știm noi mai bine, adică urmărim îndeaproape lupta anticorupție printr-un site cu o bază de date în spate.
-Noiembrie 2014 - începem lucrul la baza de date, căutăm prin arhivele DNA și ne decidem că e mai simplu să îi procesăm întâi pe cei despre care a scris și presa. Deosebit de util (dar prea stufos pentru ce ne doream noi) e portalul <a href="http://anticoruptie.hotnews.ro">Anticorupție de la Hotnews</a></br></br>
-5 iunie - lansare în public variantă beta
-  </div>
-</div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title">La ce te ajută platforma noastră:</h3>
   </div>
   <div class="panel-body">
@@ -39,7 +29,7 @@ Noiembrie 2014 - începem lucrul la baza de date, căutăm prin arhivele DNA și
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title">Ce găsești aici?</h3>
   </div>
   <div class="panel-body">
@@ -48,7 +38,7 @@ Noiembrie 2014 - începem lucrul la baza de date, căutăm prin arhivele DNA și
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title">Cum?</h3>
   </div>
   <div class="panel-body">
@@ -64,7 +54,7 @@ Pe pagina principală poți vedea:
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title">Misiune + vizune</h3>
   </div>
   <div class="panel-body">
@@ -73,7 +63,7 @@ Pe pagina principală poți vedea:
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title">Metodă</h3>
   </div>
   <div class="panel-body">
@@ -86,7 +76,7 @@ Ne concentrăm pe om, nu pe dosar: chiar dacă unii au mai multe dosare vor avea
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title">Disclaimer: suntem nepartizani.</h3>
   </div>
   <div class="panel-body">
@@ -95,7 +85,7 @@ Ne concentrăm pe om, nu pe dosar: chiar dacă unii au mai multe dosare vor avea
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title">Mulțumiri</h3>
   </div>
   <div class="panel-body">
@@ -104,7 +94,7 @@ Ne concentrăm pe om, nu pe dosar: chiar dacă unii au mai multe dosare vor avea
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading panel-heading-custom">
     <h3 class="panel-title"><a name="contribuie"><span style="font-size: 100%" class="label label-danger">Implică-te:</span></a></h3>
   </div>
   <div class="panel-body">
@@ -120,6 +110,16 @@ Ne concentrăm pe om, nu pe dosar: chiar dacă unii au mai multe dosare vor avea
     </form>
 
 
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading panel-heading-custom">
+    <h3 class="panel-title">Cronologie</h3>
+  </div>
+  <div class="panel-body">
+    Toamna 2014 - se întețesc marii corupți condamnați, nici nu mai știm care când a intrat și câtă pedeapsă mai are de executat. Realizăm că trăim momente istorice în lupta anticorupție și vrem să le marcăm printr-un compendiu al marilor corupți, căci tare ne place să punem lucrurile în ordine. Facem ce știm noi mai bine, adică urmărim îndeaproape lupta anticorupție printr-un site cu o bază de date în spate.
+Noiembrie 2014 - începem lucrul la baza de date, căutăm prin arhivele DNA și ne decidem că e mai simplu să îi procesăm întâi pe cei despre care a scris și presa. Deosebit de util (dar prea stufos pentru ce ne doream noi) e portalul <a href="http://anticoruptie.hotnews.ro">Anticorupție de la Hotnews</a></br></br>
+5 iunie - lansare în public variantă beta
   </div>
 </div>
 {% include "footer.html" %}
