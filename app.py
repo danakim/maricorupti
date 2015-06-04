@@ -139,6 +139,28 @@ def despre():
         'despre.html'
         )
 
+# 'Joc kit' page
+@app.route('/joc')
+def joc():
+    # Always try and reconnect to Mysql,
+    # the connection timeout may be expired
+    cnx.reconnect(attempts=3, delay=1)
+
+    return render_template(
+        'joc.html'
+        )
+
+# 'Educatie' page
+@app.route('/educatie')
+def educatie():
+    # Always try and reconnect to Mysql,
+    # the connection timeout may be expired
+    cnx.reconnect(attempts=3, delay=1)
+
+    return render_template(
+        'educatie.html'
+        )
+
 @app.route('/statistici')
 def statistici():
     # Always try and reconnect to Mysql,

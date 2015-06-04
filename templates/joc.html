@@ -1,0 +1,18 @@
+{% block head %}
+{% include "head.html" %}
+{% endblock %}
+
+{% block content %}
+<!-- Google fonts config, in case we need to default back
+<body style="font-family: 'Open Sans', sans-serif;>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
+<body style="font-family: 'Gotham';">
+{% include "navbar.html" %}
+
+<div class="container">
+    <a href="/static/img/kit_joc.png"><img style="width: 100%;" src="/static/img/kit_joc.png"></a>
+{% include "footer.html" %}
+</div>
+</body>
+</html>
+{% endblock %}
