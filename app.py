@@ -58,12 +58,8 @@ def home_page():
         pedeapsa_maxima = cursor.fetchall()
         cursor.execute("SELECT id, durata_dosar FROM dosare_corupti ORDER BY durata_dosar DESC limit 1")
         dosar_maxim = cursor.fetchall()
-        cursor.execute("SELECT id, prenume, nume, ani_inchisoare, executare, img_url_slider FROM dosare_corupti")
-        info_slider_pre = cursor.fetchall()
-        info_slider = []
-        for entry in info_slider_pre:
-            if entry[5]:
-                info_slider.append(entry)
+        cursor.execute("SELECT id, img_url_slider FROM dosare_corupti WHERE img_url_slider LIKE '%img%' ORDER BY RAND() LIMIT 1;")
+        info_slider = cursor.fetchall()
 
     # Send all the variables to the template
     return render_template(

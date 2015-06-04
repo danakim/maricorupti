@@ -26,7 +26,9 @@ jQuery(function($) {
     <div class="container marketing" style="margin: 0 auto; padding-top: 80px"><!-- /.container -->
         <div class="row">
             <div class="col-md-8">
-                <img width="750" height="400" src="/static/img/stickers/tura-online-4.jpg">
+                {% for entry in info_slider %}
+                <a href="/profil?id={{ entry.0 }}"><img width="750" height="400" src="{{ entry.1 }}"></a>
+                {% endfor %}
             </div>
             <div class="col-md-4">
                 <div class="fb-page" data-href="https://www.facebook.com/maricorupti" data-width="360"  data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/maricorupti"><a href="https://www.facebook.com/maricorupti">Mari Corupți</a></blockquote></div></div>
