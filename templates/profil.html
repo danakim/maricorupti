@@ -7,8 +7,10 @@
 
 
 {% block content %}
-<body style="font-family: 'Open Sans', sans-serif;">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<!-- Google fonts config, in case we need to default back
+<body style="font-family: 'Open Sans', sans-serif;>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
+<body style="font-family: 'Gotham';">
     {% include "navbar.html" %}
 
     {% if profil.5 == 'PDL' %}
@@ -59,7 +61,7 @@
                     <p style="font-size: 150%; margin-top: 5px; margin-bottom: -5px">{{ profil.4 }}</p>
                     <p style="font-size: 150%; margin-top: 5px; margin-bottom: -5px">{{ profil.7 }}</p>
                 </div>
-                <div style='padding-top: 5px; padding-bottom: 5px'><button onclick="window.location.href='/dosare?filtru=ani_inchisoare'" class="btn btn-ani" type="button" style='font-size: 150%;'>{{ profil.11 }} ani</button> <button onclick="window.location.href='/dosare?filtru={{ executare_link }}'" class="btn {{ butonexecutare }}" type="button" style='font-size: 150%;'>{{ executare }}</button></div>
+                <div style='padding-top: 5px; padding-bottom: 5px'><button onclick="window.location.href='/dosare?filtru=ani_inchisoare'" class="btn btn-ani" type="button" style='font-size: 145%;'>{{ profil.11 }} ani</button> <button onclick="window.location.href='/dosare?filtru={{ executare_link }}'" class="btn {{ butonexecutare }}" type="button" style='font-size: 145%;'>{{ executare }}</button></div>
             </div>
             <div class="col-md-3">
                 <div>Partid:</div>
