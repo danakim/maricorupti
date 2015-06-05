@@ -36,7 +36,7 @@ jQuery(function($) {
                 <div class="fb-page" data-href="https://www.facebook.com/maricorupti" data-width="360"  data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/maricorupti"><a href="https://www.facebook.com/maricorupti">Mari Corupți</a></blockquote></div></div>
             </div>
             <div id="stats" class="col-md-4" style="padding-top: 17px">
-                <p style="font-weight: bold; font-size: 14px">
+                <p style="font-size: 14px">
                     <span id="stats-row" data-url="/profil?id={{ ultima_condamnare.0 }}" style="font-size: 100%; cursor: pointer; cursor: hand;" class="label label-danger">{{ ultima_condamnare.1 }} zile</span> de la ultima condamnare.</br></br>
                     Cea mai lungă pedeapsă: <span id="stats-row" data-url="/profil?id={{ pedeapsa_maxima.0 }}" style="font-size: 100%; cursor: pointer; cursor: hand;" class="label label-default">{{ pedeapsa_maxima.1 }} ani</span></br></br>
                     Cel mai lung dosar: <span id="stats-row" data-url="/profil?id={{ dosar_maxim.0 }}" style="font-size: 100%; cursor: pointer; cursor: hand;" class="label label-default">{{ dosar_maxim.1 }} zile</span>
@@ -45,19 +45,19 @@ jQuery(function($) {
         </div>
         <div class="row" style="padding-top: 18px">
             <div class="col-md-4">
-                <p style="font-weight: bold; font-size: 15px">
+                <p style="font-size: 15px">
                     Din cei {{ total_dosare }} de mari corupți, {{ total_dosare_cu_executare }} au primit pedepse cu executare.</br></br>
                     <button onclick="window.location.href='/dosare?filtru=cu_executare'" class="btn btn-danger" type="button" style='font-size: 100%;'>{{ total_dosare_cu_executare }}</button><span style="cursor: pointer; cursor: hand;"> CONDAMNĂRI CU EXECUTARE</span>
                 </p>
             </div>
             <div class="col-md-4">
-                <p style="font-weight: bold; font-size: 15px">
+                <p style="font-size: 15px">
                     Din cei {{ total_dosare }} de mari corupți, {{ total_dosare_fara_executare }} au primit pedepse cu suspendare.</br></br>
                     <button onclick="window.location.href='/dosare?filtru=fara_executare'" class="btn btn-success" type="button" style='font-size: 100%;'>{{ total_dosare_fara_executare }}</button><span style="cursor: pointer; cursor: hand;"> CONDAMNĂRI CU SUSPENDARE</span>
                 </p>
             </div>
             <div class="col-md-4">
-                <p style="font-weight: bold; font-size: 15px">
+                <p style="font-size: 15px">
                     Mai toate partidele au mari corupți: PSD, PNL (PDL), UDMR, PNȚCD, PC</br></br>
                     <button onclick="window.location.href='/dosare?filtru=partid_1'" class="btn btn-ani" type="button" style='font-size: 100%;'>10</button> <span style="cursor: pointer; cursor: hand;"> CONDAMNĂRI / PARTIDE</span>
                 </p>
