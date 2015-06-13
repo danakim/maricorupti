@@ -4,6 +4,8 @@ from flask import Flask, render_template, request, redirect
 from datetime import date
 import re
 import ConfigParser
+import json
+import requests
 import mysql.connector
 # This crap is needed to enforce utf-8 everywhere
 # http://stackoverflow.com/questions/5040532/python-ascii-codec-cant-decode-byte
@@ -18,9 +20,9 @@ app = Flask(__name__)
 app.debug = True
 ##
 
-# Read the config file for the mysql credentials
+# Read the config file for various credentials
 config = ConfigParser.ConfigParser()
-config.read('db.ini')
+config.read('cred.ini')
 
 # Configure the mysql connection
 db_config = {
@@ -226,6 +228,33 @@ def statistici():
         total_dosare_fara_executare=total_dosare_fara_executare[0],
         )
 
+# Zelist page
+@app.route('/zelist')
+def zelist():
+    zelist_key = config.get('zelist', 'key')
+    request = requests.get('http://www.zelist.ro/monitor/api/last?key=' + zelist_key + '&ex=maricorupti.ro')
+    zelist = json.loads(request.text)
+    zitems = []
+    for item in zelist['items'].iteritems():
+        zitem = {}
+        if 'title' in item[1]:
+            zitem.update({'title': item[1]['title']})
+        if 'author_title' in item[1]:
+            zitem.update({'author': item[1]['author_title']})
+        if 'url' in item[1]:
+            zitem.update({'url': item[1]['url']})
+        if 'photo' in item[1]:
+            zitem.update({'photo': item[1]['photo']})
+        if 'publish_date' in item[1]:
+            zitem.update({'date': item[1]['publish_date']})
+        if 'viewership' in item[1]:
+            zitem.update({'viewership': item[1]['viewership']})
+        zitems.append(zitem)
+
+    return render_template(
+        'zelist.html',
+        zitems=zitems
+        )
 
 # This is only used when running the app via
 # flask's builtin webserver. We usually run this

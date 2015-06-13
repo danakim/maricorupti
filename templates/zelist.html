@@ -1,0 +1,40 @@
+{% block head %}
+{% include "head.html" %}
+{% endblock %}
+
+{% block content %}
+<!-- Google fonts config, in case we need to default back
+<body style="font-family: 'Open Sans', sans-serif;>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
+<body style="font-family: 'Gotham';">
+{% include "navbar.html" %}
+
+<div class="container">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>URL</th>
+          <th>Photo</th>
+          <th>Publish Date</th>
+          <th>Viewership</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in zitems %}
+          <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.author }}</td>
+            <td><a href="{{ item.url }}">{{ item.url }}</a></td>
+            <td><img src={{ item.photo }} height="60" width="60"></td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.viewership }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+</body>
+</html>
+{% endblock %}
